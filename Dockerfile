@@ -5,6 +5,7 @@ ENV PATH /root/.local/bin:$PATH
 
 RUN apk update \
  && apk upgrade \
+ && apk add python \
  && apk add --update bash && rm -rf /var/cache/apk/* \
  && echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/community" >> /etc/apk/repositories \
  && echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/main" >> /etc/apk/repositories \
