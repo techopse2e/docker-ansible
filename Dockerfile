@@ -5,7 +5,6 @@ ENV PATH /root/.local/bin:$PATH
 
 RUN apk update \
  && apk upgrade \
- && apk add python py-pip python-dev \
  && apk add --update bash && rm -rf /var/cache/apk/* \
  && echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/community" >> /etc/apk/repositories \
  && echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/main" >> /etc/apk/repositories \
@@ -19,12 +18,14 @@ RUN apk update \
 
 RUN apk --update add ansible
 
-RUN pip install --upgrade pip \
+RUN curl -O https://bootstrap.pypa.io/get-pip.py \
+ && python3 get-pip.py --user \
  && pip install docker-py \
  && pip install awscli --upgrade --user \
  && aws --version
 
-RUN pip install boto boto3 botocore
+RUN pip install boto \
+ && pip install boto3
 
 RUN curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest \
  && chmod +x /usr/local/bin/ecs-cli \
