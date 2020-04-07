@@ -3,8 +3,8 @@ FROM docker
 ENV TIME_ZONE Europe/London
 ENV PATH /root/.local/bin:$PATH
 
-RUN apk update -y \
- && apk upgrade -y \
+RUN apk update \
+ && apk upgrade \
  && apk add --update bash && rm -rf /var/cache/apk/* \
  && echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/community" >> /etc/apk/repositories \
  && echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/main" >> /etc/apk/repositories \
